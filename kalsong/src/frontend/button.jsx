@@ -13,6 +13,7 @@ const Change_Time = () => {
     let [sixmonthsong, setsixmonthsong] = useState([])
     let [oneyearsong, setoneyearsong] = useState([])
     let [allyearsong, setallyearsong] = useState([])    
+    let [animation, setAnimation] = useState(false)
     const [songs, setSongs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(10);
