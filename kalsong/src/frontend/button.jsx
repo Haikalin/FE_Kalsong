@@ -48,7 +48,7 @@ const Change_Time = () => {
 
     useEffect(() => {
         const fetch1month = async () => {
-          let result = await axios.get("http://localhost:5050/onemonth")
+          let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
           console.log(result.data)
           setSongs(result.data)
         }
@@ -83,28 +83,28 @@ const Change_Time = () => {
     }
     
     const handleClik = async () => {
-        let result = await axios.get("http://localhost:5050/onemonth")
+        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
         result = result.data
         add_bgreen("button1")
         setSongs(result)
     }
     
     const handleClik2 = async () => {
-        let result = await axios.get("http://localhost:5050/sixmonth")
+        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonths")
         result = result.data
         add_bgreen("button2")
         setSongs(result)
     }
     
     const handleClik3 = async () => {
-        let result = await axios.get("http://localhost:5050/oneyear")
+        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
         result = result.data
         add_bgreen("button3")
         setSongs(result)
     }
     
     const handleClik4 = async () => {
-        let result = await axios.get("http://localhost:5050/alltime")
+        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
         result = result.data
         add_bgreen("button4")
         setSongs(result)
