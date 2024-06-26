@@ -90,7 +90,7 @@ const Change_Time = () => {
     }
     
     const handleClik2 = async () => {
-        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonths")
+        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
         result = result.data
         add_bgreen("button2")
         setSongs(result)
