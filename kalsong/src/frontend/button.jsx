@@ -9,6 +9,10 @@ import Pagination from "./pagination.jsx";
 import Footer from "./footer.jsx";
 
 const Change_Time = () => {
+    let [onemonthsong, setonemonthsong] = useState([])
+    let [sixmonthsong, setsixmonthsong] = useState([])
+    let [oneyearsong, setoneyearsong] = useState([])
+    let [allyearsong, setallyearsong] = useState([])    
     const [songs, setSongs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(10);
@@ -51,6 +55,7 @@ const Change_Time = () => {
           let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
           console.log(result.data)
           setSongs(result.data)
+          setonemonthsong(result.data)
         }
         fetch1month()
         }, []);
@@ -83,29 +88,58 @@ const Change_Time = () => {
     }
     
     const handleClik = async () => {
-        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
-        result = result.data
+        let result = []
+        if (onemonthsong.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
+            result = result.data
+            setonemonthsong(result)
+        }
+        else {
+            result = onemonthsong
+        }
         add_bgreen("button1")
         setSongs(result)
+
     }
     
     const handleClik2 = async () => {
-        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
-        result = result.data
+        let result = []
+        if (sixmonthsong.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
+            result = result.data
+            setsixmonthsong(result)
+        }
+        else {
+            result = sixmonthsong
+        }
         add_bgreen("button2")
         setSongs(result)
     }
     
     const handleClik3 = async () => {
-        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
-        result = result.data
+        let result = []
+        if (oneyearsong.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
+            result = result.data
+            setoneyearsong(result)
+        }
+        else {
+            result = oneyearsong
+        }
         add_bgreen("button3")
         setSongs(result)
     }
     
     const handleClik4 = async () => {
-        let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
-        result = result.data
+        let result = []
+        if (allyearsong.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
+            result = result.data
+            setallyearsong(result)
+        }
+        else {
+            result = allyearsong
+        }
         add_bgreen("button4")
         setSongs(result)
     }
