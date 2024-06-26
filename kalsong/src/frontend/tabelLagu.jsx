@@ -9,9 +9,9 @@ export const TabelLagu = ({data, num}) => {
             <table id="tabelmusik" className="w-full bg-gray-800 mt-5 border border-gray-700 fade-in">
                 <thead>
                     <tr>
-                        <th className="bg-black text-white px-4 py-2 w-1/12">No</th>
-                        <th className="bg-black text-white px-12 py-2 w-8/12">Judul Lagu</th>
-                        <th className="bg-black text-white px-4 py-2 w-3/12">Artis</th>
+                        <th className="bg-black text-white px-4 py-2 w-1/12 font-Roboto font-bold">No</th>
+                        <th className="bg-black text-white px-12 py-2 w-8/12 font-Roboto font-bold" >Judul Lagu</th>
+                        <th className="bg-black text-white px-4 py-2 w-3/12 font-Roboto font-bold">Artis</th>
                     </tr>
                 </thead>
                 <tbody>

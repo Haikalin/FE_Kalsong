@@ -19,6 +19,9 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn 1s forwards',
       },
+      fontFamily: {
+        'Roboto': ['Roboto', 'sans-serif'],
+      },
     },
   },
   plugins: [],
