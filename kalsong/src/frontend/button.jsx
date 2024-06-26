@@ -6,14 +6,12 @@ import TabelLagu from "./tabelLagu.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TabelArtis from "./tabelArtis.jsx";
 import Pagination from "./pagination.jsx";
-import Footer from "./footer.jsx";
 
 const Change_Time = () => {
     let [onemonthsong, setonemonthsong] = useState([])
     let [sixmonthsong, setsixmonthsong] = useState([])
     let [oneyearsong, setoneyearsong] = useState([])
     let [allyearsong, setallyearsong] = useState([])    
-    let [animation, setAnimation] = useState(false)
     const [songs, setSongs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(10);
@@ -21,10 +19,20 @@ const Change_Time = () => {
     const lastIndex = currentPage * songsPerPage;
     const currentSongs = songs.slice(firstIndex, lastIndex);
 
+    // Ganti halaman
     const changePage = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
 
+    // Animasi tabel
+    const tableAnimation = () => {
+        const table = document.getElementById("tabelmusik");
+        document.getElementById("tabelmusik").classList.remove("fade-in");
+        void table.offsetWidth;
+        document.getElementById("tabelmusik").classList.add("fade-in");
+    }
+
+    // Ganti warna background button
     const changeBgPage = (idpage) => {
         const pageButton = [
             document.getElementById("buttonpage1"),
@@ -43,14 +51,17 @@ const Change_Time = () => {
                 button.classList.add("bg-spotify-black")
             }
         })
+        tableAnimation();
     }
 
+    // Ganti warna background button
     useEffect(() => {
         const page1 = document.getElementById("buttonpage1")
         page1.classList.remove("bg-spotify-black")
         page1.classList.add("bg-spotify-green")
     }, []);
 
+    // Mengambil data lagu
     useEffect(() => {
         const fetch1month = async () => {
           let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
@@ -60,6 +71,18 @@ const Change_Time = () => {
         }
         fetch1month()
         }, []);
+
+    useEffect(() => {
+        const all_data = async () => {
+            let result2 = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
+            setsixmonthsong(result2.data)
+            let result3 = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
+            setoneyearsong(result3.data)
+            let result4 = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
+            setallyearsong(result4.data)
+        }
+        all_data()
+    }, []);
     
     useEffect(() => {
         const one_month = document.getElementById("button1")
@@ -88,61 +111,32 @@ const Change_Time = () => {
         })
     }
     
-    const handleClik = async () => {
-        let result = []
-        if (onemonthsong.length === 0) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
-            result = result.data
-            setonemonthsong(result)
-        }
-        else {
-            result = onemonthsong
-        }
+    const handleClik = () => {
+        let result = onemonthsong
         add_bgreen("button1")
         setSongs(result)
-
+        tableAnimation();
     }
     
     const handleClik2 = async () => {
-        let result = []
-        if (sixmonthsong.length === 0) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
-            result = result.data
-            setsixmonthsong(result)
-        }
-        else {
-            result = sixmonthsong
-        }
+        let result = sixmonthsong
         add_bgreen("button2")
         setSongs(result)
+        tableAnimation();
     }
     
     const handleClik3 = async () => {
-        let result = []
-        if (oneyearsong.length === 0) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
-            result = result.data
-            setoneyearsong(result)
-        }
-        else {
-            result = oneyearsong
-        }
+        let result = oneyearsong
         add_bgreen("button3")
         setSongs(result)
+        tableAnimation();
     }
     
     const handleClik4 = async () => {
-        let result = []
-        if (allyearsong.length === 0) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
-            result = result.data
-            setallyearsong(result)
-        }
-        else {
-            result = allyearsong
-        }
+        let result = allyearsong
         add_bgreen("button4")
         setSongs(result)
+        tableAnimation();
     }
     return (
         <>

@@ -9,6 +9,7 @@ import Footer from './frontend/footer.jsx';
 
 function App() {
 
+
   return (
     <div className="App bg-gray-800 min-h-screen flex flex-col">
       <Title />

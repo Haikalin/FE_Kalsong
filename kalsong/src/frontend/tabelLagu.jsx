@@ -1,16 +1,7 @@
 import "../tailwind.css";
 import "../index.css"
-import {useState, useEffect} from "react";
 
 export const TabelLagu = ({data, num}) => {
-
-    const [animate, setAnimate] = useState(false);
-    useEffect(() => {
-        const table = document.getElementById("tabelmusik");
-        document.getElementById("tabelmusik").classList.remove("fade-in");
-        void table.offsetWidth;
-        document.getElementById("tabelmusik").classList.add("fade-in");
-    }, [data]);
 
     return (
         console.log(data),
