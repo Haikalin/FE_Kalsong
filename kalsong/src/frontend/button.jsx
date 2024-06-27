@@ -73,13 +73,18 @@ const Change_Time = () => {
         }, []);
 
     useEffect(() => {
-        const all_data = async () => {
-            let result2 = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
-            setsixmonthsong(result2.data)
-            let result3 = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
-            setoneyearsong(result3.data)
-            let result4 = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
-            setallyearsong(result4.data)
+        const all_data = () => {
+            let result2 = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
+            // setsixmonthsong(result2.data)
+            let result3 = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
+            // setoneyearsong(result3.data)
+            let result4 = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
+            // setallyearsong(result4.data)
+            Promise.all([result2, result3, result4]).then((values) => {
+                setsixmonthsong(values[0].data)
+                setoneyearsong(values[1].data)
+                setallyearsong(values[2].data)
+            })
         }
         all_data()
     }, []);
