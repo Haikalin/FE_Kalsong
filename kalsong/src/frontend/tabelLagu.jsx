@@ -18,8 +18,8 @@ export const TabelLagu = ({data, num}) => {
                     {data.map((song, index) => {
                         return (
                             <tr key={index + num} className="w-full">
-                                <td className="py-1 border border-gray-700 text-center bg-white">{index + num + 1}</td>
-                                <td className="py-1 border border-gray-700 bg-white">
+                                <td className="py-1 border border-gray-700 w-1/12 text-center bg-white">{index + num + 1}</td>
+                                <td className="py-1 border border-gray-700 w-7/12 bg-white">
                                     <a href={song.track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
                                         {song.track.name.split(/ [-/()]/)[0]}
                                     </a>
