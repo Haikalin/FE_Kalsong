@@ -26,10 +26,10 @@ const Change_Time = () => {
 
     // Animasi tabel
     const tableAnimation = () => {
-        const table = document.getElementById("tabelmusik");
-        document.getElementById("tabelmusik").classList.remove("fade-in");
+        const table = document.getElementById("isitabel");
+        document.getElementById("isitabel").classList.remove("fade-in");
         void table.offsetWidth;
-        document.getElementById("tabelmusik").classList.add("fade-in");
+        document.getElementById("isitabel").classList.add("fade-in");
     }
 
     // Ganti warna background button
@@ -127,21 +127,33 @@ const Change_Time = () => {
     
     const handleClik3 = async () => {
         let result = oneyearsong
+        setSongs(result)
         add_bgreen("button3")
+        if (result.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
+            result = result.data
+            setonemonthsong(result)
+        }
         setSongs(result)
         tableAnimation();
     }
     
     const handleClik4 = async () => {
         let result = allyearsong
+        setSongs(result)
         add_bgreen("button4")
+        if (result.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
+            result = result.data
+            setallyearsong(result)
+        }
         setSongs(result)
         tableAnimation();
     }
     return (
         <>
         <Router>
-            <div id="kumpulan_button" className="flex justify-center">
+            <div id="kumpulan_button" className="flex justify-center mt-5">
                 <button id="button1" onClick={handleClik} class="bg-spotify-black text-white p-2 rounded-lg mx-2">1 month</button>
                 <button id="button2" onClick={handleClik2} class="bg-spotify-black text-white p-2 rounded-lg mx-2">6 months</button>
                 <button id="button3" onClick={handleClik3} class="bg-spotify-black text-white p-2 rounded-lg mx-2">1 year</button>

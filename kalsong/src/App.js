@@ -14,6 +14,7 @@ function App() {
     <div className="App bg-gray-800 min-h-screen flex flex-col">
       <Title />
       <div className='mb-auto'>
+      <p>Listen to Haikal's favorite songs on Spotify</p>
       <Change_Time/>
       </div>
       <Footer/>
