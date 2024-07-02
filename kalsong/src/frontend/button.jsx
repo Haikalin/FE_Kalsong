@@ -91,8 +91,8 @@ const Change_Time = () => {
     
     useEffect(() => {
         const one_month = document.getElementById("button1")
-        one_month.classList.remove("bg-spotify-black")
-        one_month.classList.add("bg-spotify-green")
+        one_month.classList.remove("bgblack")
+        one_month.classList.add("bggreen")
     }, []);
     
 
@@ -106,12 +106,12 @@ const Change_Time = () => {
         ]
         button.forEach((element) => {
             if (element.id === id) {
-                element.classList.remove("bg-spotify-black")
-                element.classList.add("bg-spotify-green")
+                element.classList.remove("bgblack")
+                element.classList.add("bggreen")
             }
             else {
-                element.classList.remove("bg-spotify-green")
-                element.classList.add("bg-spotify-black")
+                element.classList.remove("bggreen")
+                element.classList.add("bgblack")
             }
         })
     }
@@ -159,10 +159,10 @@ const Change_Time = () => {
         <>
         <Router>
             <div id="kumpulan_button" className="flex justify-center mt-5">
-                <button id="button1" onClick={handleClik} class="bg-spotify-black text-white p-2 rounded-lg mx-2">1 month</button>
-                <button id="button2" onClick={handleClik2} class="bg-spotify-black text-white p-2 rounded-lg mx-2">6 months</button>
-                <button id="button3" onClick={handleClik3} class="bg-spotify-black text-white p-2 rounded-lg mx-2">1 year</button>
-                <button id="button4" onClick={handleClik4} class="bg-spotify-black text-white p-2 rounded-lg mx-2">All time</button>
+                <button id="button1" onClick={handleClik} class="h-10 lg:w-22 bg-spotify-black text-white p-2 rounded-lg mx-2 ">1 month</button>
+                <button id="button2" onClick={handleClik2} class="h-10 lg:w-22 bg-spotify-black text-white p-2 rounded-lg mx-2">6 months</button>
+                <button id="button3" onClick={handleClik3} class="h-10 lg:w-22 bg-spotify-black text-white p-2 rounded-lg mx-2">1 year</button>
+                <button id="button4" onClick={handleClik4} class="h-10 lg:w-22 bg-spotify-black text-white p-2 rounded-lg mx-2">All time</button>
             </div>
             <Routes>
                 <Route path="/" element={<TabelLagu data={currentSongs} num={firstIndex}/>} />

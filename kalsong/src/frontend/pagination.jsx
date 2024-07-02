@@ -8,7 +8,7 @@ const Pagination = ({onChangePage, onchangeBgPage}) => {
         pages.push(i)
     }
     return (
-        <div class="w-1/2 h-16 mx-auto flex justify-center align-middle items-center mb-10">
+        <div class="w-1/2 h-16 mx-auto flex justify-center align-middle items-center mb-10 ">
             <div class="flex">
                 {pages.map((page) => {
                     const idpage = page + 1

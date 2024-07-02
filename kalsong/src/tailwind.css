@@ -15,3 +15,13 @@
 .fade-in {
   animation: fadeIn 1s forwards;
 }
+
+.bgblack {
+  background-color: #121212;
+}
+
+.bggreen {
+  background-color: #1DB954;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}

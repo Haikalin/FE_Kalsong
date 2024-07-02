@@ -9,6 +9,7 @@ module.exports = {
         'spotify-black': '#121212',
         'spotify-green': '#1DB954',
         'spotify-gray': '#b3b3b3',
+        'spotify-dark-green': '#0F7A37'
       },
       keyframes: {
         fadeIn: {
@@ -21,7 +22,12 @@ module.exports = {
       },
       fontFamily: {
         'Roboto': ['Roboto', 'sans-serif'],
+        'Inter': ['Inter', 'sans-serif'],
+        'Poppins': ['Poppins'],
       },
+      width: {
+        '22': '5.5rem'
+      }
     },
   },
   plugins: [],
