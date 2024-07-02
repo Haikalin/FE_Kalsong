@@ -11,9 +11,9 @@ function App() {
 
 
   return (
-    <div className="App bg-gray-800 min-h-screen flex flex-col">
+    <div className="App bg-primary min-h-screen flex flex-col">
       <Title />
-      <p>Listen to Haikal's favorite songs on Spotify</p>
+      <p className='text-light-second'>Listen to Haikal's favorite songs on Spotify</p>
       <Change_Time/>
       <Footer/>
     </div>  

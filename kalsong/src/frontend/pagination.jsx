@@ -13,7 +13,7 @@ const Pagination = ({onChangePage, onchangeBgPage}) => {
                 {pages.map((page) => {
                     const idpage = page + 1
                     return (
-                        <button id={"buttonpage"+idpage} class="w-10 h-10 flex justify-center mx-2 items-center bg-spotify-black text-white" onClick={() => {onChangePage(page + 1); onchangeBgPage("buttonpage"+idpage)}}>{page + 1}</button>
+                        <button id={"buttonpage"+idpage} class="w-10 h-10 flex justify-center mx-2 items-center bg-second-two text-white" onClick={() => {onChangePage(page + 1); onchangeBgPage("buttonpage"+idpage)}}>{page + 1}</button>
                     )
                 })}
             </div>

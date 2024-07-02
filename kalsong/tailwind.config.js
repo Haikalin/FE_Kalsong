@@ -6,10 +6,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'spotify-black': '#121212',
-        'spotify-green': '#1DB954',
-        'spotify-gray': '#b3b3b3',
-        'spotify-dark-green': '#0F7A37'
+        'primary': '#191A19',
+        'dark-one': "#2a3b2a",
+        'second-one': '#1E5128',
+        'second-two': '#4E9F3D',
+        'light-one': '#D8E9A8',
+        'light-second': '#F0F7E2'
       },
       keyframes: {
         fadeIn: {
