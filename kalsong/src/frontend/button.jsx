@@ -111,7 +111,6 @@ const Change_Time = () => {
     
     const handleClik = async () => {
         let result = onemonthsong
-        setSongs(result)
         add_bgreen("button1")
         if (result.length === 0  || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong )|| JSON.stringify(result) === JSON.stringify(allyearsong)) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
