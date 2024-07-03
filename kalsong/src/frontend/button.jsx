@@ -104,17 +104,23 @@ const Change_Time = () => {
     // Mengambil data lagu
     useEffect(() => {
         const fetchData = async () => {
-            const onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
-            const sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
-            const oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
-            const alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
-            Promise.all([onemonth, sixmonth, oneyear, alltime]).then((value) => {
-                setonemonthsong(value[0].data)
-                setsixmonthsong(value[1].data)
-                setoneyearsong(value[2].data)
-                setallyearsong(value[3].data)
-                setSongs(value[0].data)
-            })
+            const onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+            const sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+            const oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+            const alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+
+            const [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+
+            console.log("One month response:", oneMonthResponse.data[2].track.name);
+            console.log("Six month response:", sixMonthResponse.data[2].track.name);
+            console.log("One year response:", oneYearResponse.data[2].track.name);
+            console.log("All time response:", allTimeResponse.data[2].track.name);
+
+            setonemonthsong(oneMonthResponse.data);
+            setsixmonthsong(sixMonthResponse.data);
+            setoneyearsong(oneYearResponse.data);
+            setallyearsong(allTimeResponse.data);
+            setSongs(oneMonthResponse.data);
         };
 
         fetchData();
