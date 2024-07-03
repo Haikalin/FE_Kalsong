@@ -3,15 +3,47 @@ import "../tailwind.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TabelLagu from "./tabelLagu.jsx";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import TabelArtis from "./tabelArtis.jsx";
 import Pagination from "./pagination.jsx";
 
 const Change_Time = () => {
-    let [onemonthsong, setonemonthsong] = useState([])
-    let [sixmonthsong, setsixmonthsong] = useState([])
-    let [oneyearsong, setoneyearsong] = useState([])
-    let [allyearsong, setallyearsong] = useState([])    
+    let [onemonthsong, setonemonthsong] = useState(() => {
+        const onemonth =  localStorage.getItem('onemonthsong')
+        if (onemonth) {
+            return JSON.parse(onemonth)
+        }
+        else {
+            return []
+        }
+    })
+    let [sixmonthsong, setsixmonthsong] = useState(() => {
+        const sixmonth =  localStorage.getItem('sixmonthsong')
+        if (sixmonth) {
+            return JSON.parse(sixmonth)
+        }
+        else {
+            return []
+        }
+    })
+    let [oneyearsong, setoneyearsong] = useState(() => {
+        const oneyear =  localStorage.getItem('oneyearsong')
+        if (oneyear) {
+            return JSON.parse(oneyear)
+        }
+        else {
+            return []
+        }
+    })
+    let [allyearsong, setallyearsong] = useState(() => {
+        const alltime =  localStorage.getItem('allyearsong')
+        if (alltime) {
+            return JSON.parse(alltime)
+        }
+        else {
+            return []
+        }
+    })    
     const [songs, setSongs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(10);
@@ -63,23 +95,11 @@ const Change_Time = () => {
 
     useEffect(() => {
         localStorage.setItem('onemonthsong', JSON.stringify(onemonthsong));
+        console.log("Lagi ganti")
         localStorage.setItem('sixmonthsong', JSON.stringify(sixmonthsong));
         localStorage.setItem('oneyearsong', JSON.stringify(oneyearsong));
         localStorage.setItem('allyearsong', JSON.stringify(allyearsong));
     }, [onemonthsong, sixmonthsong, oneyearsong, allyearsong]);
-
-    // Memulihkan state dari localStorage saat komponen dimuat
-    useEffect(() => {
-        const storedOneMonthSong = localStorage.getItem('onemonthsong');
-        const storedSixMonthSong = localStorage.getItem('sixmonthsong');
-        const storedOneYearSong = localStorage.getItem('oneyearsong');
-        const storedAllYearSong = localStorage.getItem('allyearsong');
-
-        if (storedOneMonthSong) setonemonthsong(JSON.parse(storedOneMonthSong));
-        if (storedSixMonthSong) setsixmonthsong(JSON.parse(storedSixMonthSong));
-        if (storedOneYearSong) setoneyearsong(JSON.parse(storedOneYearSong));
-        if (storedAllYearSong) setallyearsong(JSON.parse(storedAllYearSong));
-    }, []);
 
     // Mengambil data lagu
     useEffect(() => {
