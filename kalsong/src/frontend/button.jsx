@@ -111,7 +111,10 @@ const Change_Time = () => {
                     axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear"),
                     axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime"),
                 ]);
-
+                console.log("One month: "+result1.data[2].track.name)
+                console.log("Six month: "+result2.data[2].track.name)
+                console.log("One year: "+result3.data[2].track.name)
+                console.log("All time: "+result4.data[2].track.name)
                 setonemonthsong(result1.data);
                 setsixmonthsong(result2.data);
                 setoneyearsong(result3.data);
