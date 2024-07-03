@@ -61,6 +61,26 @@ const Change_Time = () => {
         page1.classList.add("bg-second-one")
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem('onemonthsong', JSON.stringify(onemonthsong));
+        localStorage.setItem('sixmonthsong', JSON.stringify(sixmonthsong));
+        localStorage.setItem('oneyearsong', JSON.stringify(oneyearsong));
+        localStorage.setItem('allyearsong', JSON.stringify(allyearsong));
+    }, [onemonthsong, sixmonthsong, oneyearsong, allyearsong]);
+
+    // Memulihkan state dari localStorage saat komponen dimuat
+    useEffect(() => {
+        const storedOneMonthSong = localStorage.getItem('onemonthsong');
+        const storedSixMonthSong = localStorage.getItem('sixmonthsong');
+        const storedOneYearSong = localStorage.getItem('oneyearsong');
+        const storedAllYearSong = localStorage.getItem('allyearsong');
+
+        if (storedOneMonthSong) setonemonthsong(JSON.parse(storedOneMonthSong));
+        if (storedSixMonthSong) setsixmonthsong(JSON.parse(storedSixMonthSong));
+        if (storedOneYearSong) setoneyearsong(JSON.parse(storedOneYearSong));
+        if (storedAllYearSong) setallyearsong(JSON.parse(storedAllYearSong));
+    }, []);
+
     // Mengambil data lagu
     useEffect(() => {
         const fetchData = async () => {
@@ -71,7 +91,7 @@ const Change_Time = () => {
                     axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear"),
                     axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime"),
                 ]);
-    
+
                 setonemonthsong(result1.data);
                 setsixmonthsong(result2.data);
                 setoneyearsong(result3.data);
@@ -81,7 +101,7 @@ const Change_Time = () => {
                 console.error("Error fetching data:", error);
             }
         };
-    
+
         fetchData();
     }, []);
     
