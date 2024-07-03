@@ -104,25 +104,17 @@ const Change_Time = () => {
     // Mengambil data lagu
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const [result1, result2, result3, result4] = await Promise.all([
-                    axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth"),
-                    axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth"),
-                    axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear"),
-                    axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime"),
-                ]);
-                console.log("One month: "+result1.data[2].track.name)
-                console.log("Six month: "+result2.data[2].track.name)
-                console.log("One year: "+result3.data[2].track.name)
-                console.log("All time: "+result4.data[2].track.name)
-                setonemonthsong(result1.data);
-                setsixmonthsong(result2.data);
-                setoneyearsong(result3.data);
-                setallyearsong(result4.data);
-                setSongs(result1.data); // Default to 1 month data
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
+            const onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
+            const sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
+            const oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
+            const alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
+            Promise.all([onemonth, sixmonth, oneyear, alltime]).then((value) => {
+                setonemonthsong(value[0].data)
+                setsixmonthsong(value[1].data)
+                setoneyearsong(value[2].data)
+                setallyearsong(value[3].data)
+                setSongs(value[0].data)
+            })
         };
 
         fetchData();
