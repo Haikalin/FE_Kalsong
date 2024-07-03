@@ -114,18 +114,50 @@ const Change_Time = () => {
 
             let [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
 
-            if (JSON.stringify(oneMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(sixMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(allTimeResponse) === JSON.stringify(oneYearResponse)) {
+            if (JSON.stringify(oneMonthResponse) === JSON.stringify(oneYearResponse)) {
+                console.log("Error pertama")
                 onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
                 sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
                 oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
                 alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
                 [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+                setonemonthsong(oneMonthResponse.data);
+                setsixmonthsong(sixMonthResponse.data);
+                setoneyearsong(oneYearResponse.data);
+                setallyearsong(allTimeResponse.data);
+                setSongs(oneMonthResponse.data);
+            }
+            else if(JSON.stringify(sixMonthResponse) === JSON.stringify(oneYearResponse)) {
+                console.log("Error kedua")
+                onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+                sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+                oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+                alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+                [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+                setonemonthsong(oneMonthResponse.data);
+                setsixmonthsong(sixMonthResponse.data);
+                setoneyearsong(oneYearResponse.data);
+                setallyearsong(allTimeResponse.data);
+                setSongs(oneMonthResponse.data);
+            }
+            else if(JSON.stringify(allTimeResponse) === JSON.stringify(oneYearResponse)) {
+                console.log("Error ketiga")
+                onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+                sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+                oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+                alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+                [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+                setonemonthsong(oneMonthResponse.data);
+                setsixmonthsong(sixMonthResponse.data);
+                setoneyearsong(oneYearResponse.data);
+                setallyearsong(allTimeResponse.data);
+                setSongs(oneMonthResponse.data);
             }
             else {
-                console.log("One month response:", oneMonthResponse.data);
-                console.log("Six month response:", sixMonthResponse.data);
-                console.log("One year response:", oneYearResponse.data);
-                console.log("All time response:", allTimeResponse.data);
+                console.log("One month response:", oneMonthResponse.data[2].track.name);
+                console.log("Six month response:", sixMonthResponse.data[2].track.name);
+                console.log("One year response:", oneYearResponse.data[2].track.name);
+                console.log("All time response:", allTimeResponse.data[2].track.name);
 
                 setonemonthsong(oneMonthResponse.data);
                 setsixmonthsong(sixMonthResponse.data);
