@@ -71,7 +71,7 @@ const Change_Time = () => {
                     axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear"),
                     axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime"),
                 ]);
-
+    
                 setonemonthsong(result1.data);
                 setsixmonthsong(result2.data);
                 setoneyearsong(result3.data);
@@ -81,15 +81,15 @@ const Change_Time = () => {
                 console.error("Error fetching data:", error);
             }
         };
-
+    
         fetchData();
     }, []);
     
     useEffect(() => {
-        const one_month = document.getElementById("button1")
-        one_month.classList.remove("bgblack")
-        one_month.classList.add("bggreen")
+        document.getElementById("button1").classList.remove("bg-second-two");
+        document.getElementById("button1").classList.add("bg-second-one");
     }, []);
+    
     
 
 
@@ -113,54 +113,56 @@ const Change_Time = () => {
     }
     
     const handleClik = async () => {
-        let result = onemonthsong
-        add_bgreen("button1")
-        if (result.length === 0  || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong )|| JSON.stringify(result) === JSON.stringify(allyearsong)) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
-            result = result.data
-            setonemonthsong(result)
+        console.log("One month: ", songs.data.track.name[2])
+        let result = onemonthsong;
+        add_bgreen("button1");
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
+            const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+            result = response.data;
+            setonemonthsong(result);
         }
-        setSongs(result)
+        setSongs(result);
         tableAnimation();
-    }
+    };
     
     const handleClik2 = async () => {
-        let result = sixmonthsong
-        setSongs(result)
-        add_bgreen("button2")
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong )|| JSON.stringify(result) === JSON.stringify(allyearsong)) {
-            console.log("Ya, sama")
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
-            result = result.data
-            setsixmonthsong(result)
+        console.log("Six months: ", songs.data.track.name[2])
+        let result = sixmonthsong;
+        add_bgreen("button2");
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
+            const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+            result = response.data;
+            setsixmonthsong(result);
         }
-        setSongs(result)
+        setSongs(result);
         tableAnimation();
-    }
+    };
     
     const handleClik3 = async () => {
-        let result = oneyearsong
-        add_bgreen("button3")
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) ===JSON.stringify(allyearsong)) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
-            result = result.data
-            setoneyearsong(result)
+        console.log("One year: ", songs.data.track.name[2])
+        let result = oneyearsong;
+        add_bgreen("button3");
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
+            const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+            result = response.data;
+            setoneyearsong(result);
         }
-        setSongs(result)
+        setSongs(result);
         tableAnimation();
-    }
+    };
     
     const handleClik4 = async () => {
-        let result = allyearsong
-        add_bgreen("button4")
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) ===JSON.stringify (oneyearsong)) {
-            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
-            result = result.data
-            setallyearsong(result)
+        console.log("All time: ", songs.data.track.name[2])
+        let result = allyearsong;
+        add_bgreen("button4");
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong)) {
+            const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+            result = response.data;
+            setallyearsong(result);
         }
-        setSongs(result)
+        setSongs(result);
         tableAnimation();
-    }
+    };
     return (
         <>
         <Router>
