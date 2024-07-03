@@ -103,7 +103,8 @@ const Change_Time = () => {
 
     // Mengambil data lagu
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchData = async (retry_count) => {
+            const maxret = 10;
             let onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
             let sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
             let oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
@@ -112,26 +113,28 @@ const Change_Time = () => {
             let [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
 
             if (JSON.stringify(oneMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(sixMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(allTimeResponse) === JSON.stringify(oneYearResponse)) {
-                onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
-                sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
-                oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
-                alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
-                [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+                if (retry_count < maxret) {
+                    console.log(`Retry attempt ${retry_count + 1}`);
+                    await fetchData(retry_count + 1);
+                } else {
+                    console.error('Max retries reached. Data might be incorrect.');
+                }
             }
+            else {
+                console.log("One month response:", oneMonthResponse.data[2].track.name);
+                console.log("Six month response:", sixMonthResponse.data[2].track.name);
+                console.log("One year response:", oneYearResponse.data[2].track.name);
+                console.log("All time response:", allTimeResponse.data[2].track.name);
 
-            console.log("One month response:", oneMonthResponse.data[2].track.name);
-            console.log("Six month response:", sixMonthResponse.data[2].track.name);
-            console.log("One year response:", oneYearResponse.data[2].track.name);
-            console.log("All time response:", allTimeResponse.data[2].track.name);
-
-            setonemonthsong(oneMonthResponse.data);
-            setsixmonthsong(sixMonthResponse.data);
-            setoneyearsong(oneYearResponse.data);
-            setallyearsong(allTimeResponse.data);
-            setSongs(oneMonthResponse.data);
+                setonemonthsong(oneMonthResponse.data);
+                setsixmonthsong(sixMonthResponse.data);
+                setoneyearsong(oneYearResponse.data);
+                setallyearsong(allTimeResponse.data);
+                setSongs(oneMonthResponse.data);
+            }
         };
 
-        fetchData();
+        fetchData(0);
     }, []);
     
     useEffect(() => {
