@@ -11,6 +11,7 @@ const Change_Time = () => {
     let [onemonthsong, setonemonthsong] = useState(() => {
         const onemonth =  localStorage.getItem('onemonthsong')
         if (onemonth) {
+            console.log("One month local: "+onemonth)
             return JSON.parse(onemonth)
         }
         else {
@@ -20,6 +21,7 @@ const Change_Time = () => {
     let [sixmonthsong, setsixmonthsong] = useState(() => {
         const sixmonth =  localStorage.getItem('sixmonthsong')
         if (sixmonth) {
+            console.log("Six month local: "+sixmonth)
             return JSON.parse(sixmonth)
         }
         else {
@@ -121,10 +123,10 @@ const Change_Time = () => {
                 }
             }
             else {
-                console.log("One month response:", oneMonthResponse.data[2].track.name);
-                console.log("Six month response:", sixMonthResponse.data[2].track.name);
-                console.log("One year response:", oneYearResponse.data[2].track.name);
-                console.log("All time response:", allTimeResponse.data[2].track.name);
+                console.log("One month response:", oneMonthResponse.data);
+                console.log("Six month response:", sixMonthResponse.data);
+                console.log("One year response:", oneYearResponse.data);
+                console.log("All time response:", allTimeResponse.data);
 
                 setonemonthsong(oneMonthResponse.data);
                 setsixmonthsong(sixMonthResponse.data);
