@@ -28,7 +28,8 @@ module.exports = {
         'Poppins': ['Poppins'],
       },
       width: {
-        '22': '5.5rem'
+        '22': '5.5rem',
+        '18': '4.5rem'
       }
     },
   },

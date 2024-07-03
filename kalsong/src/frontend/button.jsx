@@ -171,10 +171,10 @@ const Change_Time = () => {
         <>
         <Router>
             <div id="kumpulan_button" className="flex justify-center mt-5">
-                <button id="button1" onClick={handleClik} class="h-10 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2 ">1 month</button>
-                <button id="button2" onClick={handleClik2} class="h-10 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">6 months</button>
-                <button id="button3" onClick={handleClik3} class="h-10 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">1 year</button>
-                <button id="button4" onClick={handleClik4} class="h-10 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">All time</button>
+                <button id="button1" onClick={handleClik} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2 ">1 month</button>
+                <button id="button2" onClick={handleClik2} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">6 months</button>
+                <button id="button3" onClick={handleClik3} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">1 year</button>
+                <button id="button4" onClick={handleClik4} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">All time</button>
             </div>
             <Routes>
                 <Route path="/" element={<TabelLagu data={currentSongs} num={firstIndex}/>} />
