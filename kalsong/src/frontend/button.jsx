@@ -104,12 +104,20 @@ const Change_Time = () => {
     // Mengambil data lagu
     useEffect(() => {
         const fetchData = async () => {
-            const onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
-            const sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
-            const oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
-            const alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+            let onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+            let sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+            let oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+            let alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
 
-            const [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+            let [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+
+            if (JSON.stringify(oneMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(sixMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(allTimeResponse) === JSON.stringify(oneYearResponse)) {
+                onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+                sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+                oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+                alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+                [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
+            }
 
             console.log("One month response:", oneMonthResponse.data[2].track.name);
             console.log("Six month response:", sixMonthResponse.data[2].track.name);
