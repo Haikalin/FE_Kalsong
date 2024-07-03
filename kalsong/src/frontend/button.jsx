@@ -63,27 +63,20 @@ const Change_Time = () => {
 
     // Mengambil data lagu
     useEffect(() => {
-        const fetch1month = async () => {
-          let result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
-          console.log(result.data)
-          setSongs(result.data)
-          setonemonthsong(result.data)
-        }
-        fetch1month()
-        }, []);
-
-    useEffect(() => {
         const all_data = () => {
+            let result = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
             let result2 = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
             // setsixmonthsong(result2.data)
             let result3 = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
             // setoneyearsong(result3.data)
             let result4 = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
             // setallyearsong(result4.data)
-            Promise.all([result2, result3, result4]).then((values) => {
-                setsixmonthsong(values[0].data)
-                setoneyearsong(values[1].data)
-                setallyearsong(values[2].data)
+            Promise.all([result, result2, result3, result4]).then((values) => {
+                setonemonthsong(values[0].data)
+                setsixmonthsong(values[1].data)
+                setoneyearsong(values[2].data)
+                setallyearsong(values[3].data)
+                setSongs(values[0].data)
             })
         }
         all_data()
@@ -120,7 +113,7 @@ const Change_Time = () => {
         let result = onemonthsong
         setSongs(result)
         add_bgreen("button1")
-        if (result.length === 0  || result === sixmonthsong || result === oneyearsong || result === allyearsong) {
+        if (result.length === 0  || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong )|| JSON.stringify(result) === JSON.stringify(allyearsong)) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
             result = result.data
             setonemonthsong(result)
@@ -133,7 +126,8 @@ const Change_Time = () => {
         let result = sixmonthsong
         setSongs(result)
         add_bgreen("button2")
-        if (result.length === 0 || result === onemonthsong || result === oneyearsong || result === allyearsong) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong )|| JSON.stringify(result) === JSON.stringify(allyearsong)) {
+            console.log("Ya, sama")
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
             result = result.data
             setsixmonthsong(result)
@@ -144,9 +138,8 @@ const Change_Time = () => {
     
     const handleClik3 = async () => {
         let result = oneyearsong
-        setSongs(result)
         add_bgreen("button3")
-        if (result.length === 0 || result === onemonthsong || result === sixmonthsong || result === allyearsong) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) ===JSON.stringify(allyearsong)) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
             result = result.data
             setoneyearsong(result)
@@ -157,9 +150,8 @@ const Change_Time = () => {
     
     const handleClik4 = async () => {
         let result = allyearsong
-        setSongs(result)
         add_bgreen("button4")
-        if (result.length === 0 || result === onemonthsong || result === sixmonthsong || result === oneyearsong) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) ===JSON.stringify (oneyearsong)) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
             result = result.data
             setallyearsong(result)
