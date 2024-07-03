@@ -120,7 +120,7 @@ const Change_Time = () => {
         let result = onemonthsong
         setSongs(result)
         add_bgreen("button1")
-        if (result.length === 0) {
+        if (result.length === 0  || result === sixmonthsong || result === oneyearsong || result === allyearsong) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
             result = result.data
             setonemonthsong(result)
@@ -133,7 +133,7 @@ const Change_Time = () => {
         let result = sixmonthsong
         setSongs(result)
         add_bgreen("button2")
-        if (result.length === 0) {
+        if (result.length === 0 || result === onemonthsong || result === oneyearsong || result === allyearsong) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
             result = result.data
             setsixmonthsong(result)
@@ -146,7 +146,7 @@ const Change_Time = () => {
         let result = oneyearsong
         setSongs(result)
         add_bgreen("button3")
-        if (result.length === 0) {
+        if (result.length === 0 || result === onemonthsong || result === sixmonthsong || result === allyearsong) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
             result = result.data
             setoneyearsong(result)
@@ -159,7 +159,7 @@ const Change_Time = () => {
         let result = allyearsong
         setSongs(result)
         add_bgreen("button4")
-        if (result.length === 0) {
+        if (result.length === 0 || result === onemonthsong || result === sixmonthsong || result === oneyearsong) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
             result = result.data
             setallyearsong(result)
