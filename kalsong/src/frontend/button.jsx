@@ -63,23 +63,26 @@ const Change_Time = () => {
 
     // Mengambil data lagu
     useEffect(() => {
-        const all_data = () => {
-            let result = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
-            let result2 = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
-            // setsixmonthsong(result2.data)
-            let result3 = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
-            // setoneyearsong(result3.data)
-            let result4 = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
-            // setallyearsong(result4.data)
-            Promise.all([result, result2, result3, result4]).then((values) => {
-                setonemonthsong(values[0].data)
-                setsixmonthsong(values[1].data)
-                setoneyearsong(values[2].data)
-                setallyearsong(values[3].data)
-                setSongs(values[0].data)
-            })
-        }
-        all_data()
+        const fetchData = async () => {
+            try {
+                const [result1, result2, result3, result4] = await Promise.all([
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth"),
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth"),
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear"),
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime"),
+                ]);
+
+                setonemonthsong(result1.data);
+                setsixmonthsong(result2.data);
+                setoneyearsong(result3.data);
+                setallyearsong(result4.data);
+                setSongs(result1.data); // Default to 1 month data
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
     }, []);
     
     useEffect(() => {
