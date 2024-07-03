@@ -113,8 +113,8 @@ const Change_Time = () => {
     }
     
     const handleClik = async () => {
-        console.log("One month: ", songs.data.track.name[2])
         let result = onemonthsong;
+        console.log("One month:",result[2].track.name)
         add_bgreen("button1");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
@@ -126,8 +126,8 @@ const Change_Time = () => {
     };
     
     const handleClik2 = async () => {
-        console.log("Six months: ", songs.data.track.name[2])
         let result = sixmonthsong;
+        console.log("Six month:",result[2].track.name)
         add_bgreen("button2");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
@@ -139,8 +139,8 @@ const Change_Time = () => {
     };
     
     const handleClik3 = async () => {
-        console.log("One year: ", songs.data.track.name[2])
         let result = oneyearsong;
+        console.log("One year:",result[2].track.name)
         add_bgreen("button3");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
@@ -152,8 +152,8 @@ const Change_Time = () => {
     };
     
     const handleClik4 = async () => {
-        console.log("All time: ", songs.data.track.name[2])
         let result = allyearsong;
+        console.log("All year:",result[2].track.name)
         add_bgreen("button4");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
