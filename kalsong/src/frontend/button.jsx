@@ -116,16 +116,28 @@ const Change_Time = () => {
         })
     }
     
-    const handleClik = () => {
+    const handleClik = async () => {
         let result = onemonthsong
+        setSongs(result)
         add_bgreen("button1")
+        if (result.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth")
+            result = result.data
+            setonemonthsong(result)
+        }
         setSongs(result)
         tableAnimation();
     }
     
     const handleClik2 = async () => {
         let result = sixmonthsong
+        setSongs(result)
         add_bgreen("button2")
+        if (result.length === 0) {
+            result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth")
+            result = result.data
+            setsixmonthsong(result)
+        }
         setSongs(result)
         tableAnimation();
     }
@@ -137,7 +149,7 @@ const Change_Time = () => {
         if (result.length === 0) {
             result = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear")
             result = result.data
-            setonemonthsong(result)
+            setoneyearsong(result)
         }
         setSongs(result)
         tableAnimation();
