@@ -105,7 +105,7 @@ const Change_Time = () => {
 
     // Mengambil data lagu
     useEffect(() => {
-        const fetchData = async (retry_count) => {
+        const fetchData = async () => {
             const maxret = 10;
             let onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
             let sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
@@ -115,12 +115,11 @@ const Change_Time = () => {
             let [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
 
             if (JSON.stringify(oneMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(sixMonthResponse) === JSON.stringify(oneYearResponse) || JSON.stringify(allTimeResponse) === JSON.stringify(oneYearResponse)) {
-                if (retry_count < maxret) {
-                    console.log(`Retry attempt ${retry_count + 1}`);
-                    await fetchData(retry_count + 1);
-                } else {
-                    console.error('Max retries reached. Data might be incorrect.');
-                }
+                onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
+                sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
+                oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
+                alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+                [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
             }
             else {
                 console.log("One month response:", oneMonthResponse.data);
@@ -136,7 +135,7 @@ const Change_Time = () => {
             }
         };
 
-        fetchData(0);
+        fetchData();
     }, []);
     
     useEffect(() => {
