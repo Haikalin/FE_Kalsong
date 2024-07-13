@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import TabelArtis from "./tabelArtis.jsx";
 import Pagination from "./pagination.jsx";
 
-const Change_Time = () => {
+const Change_Time = ({onChangeTenFirstSongs}) => {
     let [onemonthsong, setonemonthsong] = useState(() => {
         const onemonth =  localStorage.getItem('onemonthsong')
         if (onemonth) {
@@ -58,12 +58,21 @@ const Change_Time = () => {
         setCurrentPage(pageNumber)
     }
 
+    let miniTitle = document.getElementById("miniTitle");
+
     // Animasi tabel
     const tableAnimation = () => {
         const table = document.getElementById("isitabel");
         document.getElementById("isitabel").classList.remove("fade-in");
         void table.offsetWidth;
         document.getElementById("isitabel").classList.add("fade-in");
+    }
+
+    const listAnimation = () => {
+        const list = document.getElementById("carousel");
+        document.getElementById("carousel").classList.remove("fade-in");
+        void list.offsetWidth;
+        document.getElementById("carousel").classList.add("fade-in");
     }
 
     // Ganti warna background button
@@ -164,6 +173,7 @@ const Change_Time = () => {
                 setoneyearsong(oneYearResponse.data);
                 setallyearsong(allTimeResponse.data);
                 setSongs(oneMonthResponse.data);
+                onChangeTenFirstSongs(oneMonthResponse.data.slice(0,10))
             }
         };
 
@@ -207,7 +217,10 @@ const Change_Time = () => {
             setonemonthsong(result);
         }
         setSongs(result);
+        onChangeTenFirstSongs(result.slice(0,10))
         tableAnimation();
+        listAnimation();
+        miniTitle.innerHTML = "Top 10 Haikal's songs (1 Month)";
     };
     
     const handleClik2 = async () => {
@@ -220,7 +233,10 @@ const Change_Time = () => {
             setsixmonthsong(result);
         }
         setSongs(result);
+        onChangeTenFirstSongs(result.slice(0,10))
         tableAnimation();
+        listAnimation();
+        miniTitle.innerHTML = "Top 10 Haikal's songs (6 Months)";
     };
     
     const handleClik3 = async () => {
@@ -233,7 +249,10 @@ const Change_Time = () => {
             setoneyearsong(result);
         }
         setSongs(result);
+        onChangeTenFirstSongs(result.slice(0,10))
         tableAnimation();
+        listAnimation();
+        miniTitle.innerHTML = "Top 10 Haikal's songs (1 Year)";
     };
     
     const handleClik4 = async () => {
@@ -246,12 +265,15 @@ const Change_Time = () => {
             setallyearsong(result);
         }
         setSongs(result);
+        onChangeTenFirstSongs(result.slice(0,10))
         tableAnimation();
+        listAnimation();
+        miniTitle.innerHTML = "Top 10 Haikal's songs (All Time)";
     };
     return (
         <>
         <Router>
-            <div id="kumpulan_button" className="flex justify-center mt-5">
+            <div id="kumpulan_button" className="flex justify-center mt-8">
                 <button id="button1" onClick={handleClik} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2 ">1 month</button>
                 <button id="button2" onClick={handleClik2} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">6 months</button>
                 <button id="button3" onClick={handleClik3} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-white p-2 rounded-lg mx-2">1 year</button>

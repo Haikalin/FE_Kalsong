@@ -26,11 +26,22 @@ module.exports = {
         'Roboto': ['Roboto', 'sans-serif'],
         'Inter': ['Inter', 'sans-serif'],
         'Poppins': ['Poppins'],
+        'Oswald': ['Oswald'],
       },
       width: {
         '22': '5.5rem',
         '18': '4.5rem'
-      }
+      },
+      height: {
+        '100': '25rem',
+      },
+      boxShadow: {
+        'custom' : '8px 8px 20px 1px #F0F7E2',
+        'empty' : '0 0 0 0 #F0F7E2',
+      },
+      backgroundImage: {
+        'gradient-to-b': 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6))',
+      },
     },
   },
   plugins: [],

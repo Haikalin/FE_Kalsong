@@ -1,6 +1,7 @@
 import Title from './frontend/header.jsx';
 import './App.css';
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Carousel from './frontend/carousel.jsx'
 import "./tailwind.css";
 import Change_Time from './frontend/button.jsx';
 import Footer from './frontend/footer.jsx';
@@ -8,13 +9,22 @@ import Footer from './frontend/footer.jsx';
 
 
 function App() {
+  const [tenFirstSongs, setTenFirstSongs] = useState([])
 
+  useEffect(() => {
+    console.log(tenFirstSongs)
+  }, [tenFirstSongs])
+
+  const changeTenFirstSongs = (data) => {
+    setTenFirstSongs(data)
+  }
 
   return (
     <div className="App bg-primary min-h-screen flex flex-col">
       <Title />
-      <p className='text-light-second'>Listen to Haikal's favorite songs on Spotify</p>
-      <Change_Time/>
+      <p id="miniTitle" className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
+      <Carousel datas={tenFirstSongs}/>
+      <Change_Time onChangeTenFirstSongs={changeTenFirstSongs}/>
       <Footer/>
     </div>  
   );
