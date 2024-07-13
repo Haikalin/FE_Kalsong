@@ -3,7 +3,8 @@
 }
 
 @keyframes slideToLeft {
-  from {left: 0%;}
+  from {left: 0%;
+  box-shadow: 10px 10px 10px 0px #F0F7E2;}
   to {left: -100%;
   box-shadow: 0px 0px 0px 0px white;}
 }

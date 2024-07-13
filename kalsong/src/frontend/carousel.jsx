@@ -9,26 +9,29 @@ const Carousel = ({datas}) => {
 
     const handleDotClick = (index) => {
         const songs = document.querySelectorAll("#singleItem");
+        const dots = document.querySelectorAll("#dots")
         if (songs.length === 0) return;
-
+        if (dots.length === 0) return;
         songs[slideIndex].style.animation = "slideToLeft 1s ease-in-out forwards";
         songs[index].style.animation = "slideToRight 1s ease-in-out forwards";
-
+        changeDotsColor(slideIndex, index)
         setSlideIndex(index);
     }   
 
     useEffect(() => {
         const songs = document.querySelector("#singleItem");
+        const dot = document.querySelector("#dot")
         if (songs === null) return;
         if (isStart === false) {
             songs.style.animation = "slideToRight 1s ease-in-out forwards";
+            dot.classList.remove("bg-white")
+            dot.classList.add("bg-second-two")
             setIsStart(true);
         }
     },[datas])
 
     useEffect(() => {
         const songs = document.querySelectorAll("#singleItem");
-        const dots = document.querySelectorAll("#dot");
         if (songs.length === 0) return;
     
         const interval = setInterval(() => {
@@ -42,16 +45,26 @@ const Carousel = ({datas}) => {
                 // Add animation
                 songs[current].style.animation = "slideToLeft 1s ease-in-out forwards";
                 songs[next].style.animation = "slideToRight 1s ease-in-out forwards";
+                changeDotsColor(current,next)
                 console.log(next)
                 // return next index
                 return next;
             });
-        },2000);
+        },3000);
     
         return () => {
             clearInterval(interval);
     }}, [datas])
     
+    const changeDotsColor = (current, next) => {
+        const dots = document.querySelectorAll("#dot")
+        console.log("current", current, "next", next)
+        if (dots.length === 0) return
+        dots[current].classList.remove("bg-second-two")
+        dots[current].classList.add("bg-white")
+        dots[next].classList.remove("bg-white")
+        dots[next].classList.add("bg-second-two")
+    }
 
     return (
         <div id="carousel" className="mx-auto mt-2 h-40 lg:min-h-56 lg:h-56 w-full relative">
