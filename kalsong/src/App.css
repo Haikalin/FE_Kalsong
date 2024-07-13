@@ -15,7 +15,17 @@
   box-shadow: 10px 10px 10px 0px #F0F7E2;}
 }
 
+@keyframes rightToLeft {
+  from {opacity: 0;
+    transform: translateY(200px);}
+  to {opacity: 1;
+    transform: translateY(0px);}
+}
 
 #singleItem {
   left: -100%;
+}
+
+#miniTitle {
+  animation: rightToLeft 1s ease-in-out forwards;
 }

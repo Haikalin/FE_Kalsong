@@ -19,6 +19,11 @@ function App() {
     setTenFirstSongs(data)
   }
 
+  // useEffect (() => {
+  //   let titleMini = document.getElementById("miniTitle")
+  //   titleMini.classList.add("slideToRight")
+  // }, [])
+
   return (
     <div className="App bg-primary min-h-screen flex flex-col">
       <Title />
