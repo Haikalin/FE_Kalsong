@@ -32,27 +32,29 @@ const Carousel = ({datas}) => {
         if (songs.length === 0) return;
     
         const interval = setInterval(() => {
-            const currentSlide = slideIndex;
-            const nextSlide = (slideIndex + 1) % songs.length;
+            setSlideIndex((prev) => {
+                let current = prev;
+                let next = (prev + 1) % songs.length;
 
-            console.log(songs[currentSlide])
-            console.log(songs[nextSlide])
+                // Cek panjang data
+                if (songs.length === 0) return;
 
-            songs[currentSlide].style.animation = "slideToLeft 1s ease-in-out forwards";
-            songs[nextSlide].style.animation = "slideToRight 1s ease-in-out forwards";
-            // songs[currentSlide].style.animation = "slideToLeft 1s ease-in-out forwards";
-            // songs[nextSlide].style.animation = "slideToRight 1s ease-in-out forwards";
-    
-            setSlideIndex(nextSlide);
-        }, 2000);
+                // Add animation
+                songs[current].style.animation = "slideToLeft 1s ease-in-out forwards";
+                songs[next].style.animation = "slideToRight 1s ease-in-out forwards";
+                console.log(next)
+                // return next index
+                return next;
+            });
+        },2000);
     
         return () => {
             clearInterval(interval);
-    }}, [slideIndex, datas])
+    }}, [datas])
     
 
     return (
-        <div id="carousel" className="mx-auto mt-2 h-52 lg:min-h-56 lg:h-56 w-full relative">
+        <div id="carousel" className="mx-auto mt-2 h-40 lg:min-h-56 lg:h-56 w-full relative">
             <div id="showSlide" className="w-36 lg:w-56 h-36 lg:h-56 mx-auto overflow-hidden relative">
                 {datas.map((data, index) => {
                     return(
