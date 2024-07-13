@@ -18,6 +18,7 @@ const Carousel = ({datas}) => {
         setSlideIndex(index);
     }   
 
+    // Slide index menjadi dependensi agar ketika titik ditekan, reset menjadi 3 detik lagi
     useEffect(() => {
         const songs = document.querySelector("#singleItem");
         const dot = document.querySelector("#dot")
@@ -28,7 +29,7 @@ const Carousel = ({datas}) => {
             dot.classList.add("bg-second-two")
             setIsStart(true);
         }
-    },[datas])
+    },[slideIndex, datas])
 
     useEffect(() => {
         const songs = document.querySelectorAll("#singleItem");
