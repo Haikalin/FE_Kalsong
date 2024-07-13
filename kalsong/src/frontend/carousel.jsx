@@ -55,7 +55,7 @@ const Carousel = ({datas}) => {
     
         return () => {
             clearInterval(interval);
-    }}, [datas])
+    }}, [slideIndex, datas])
     
     const changeDotsColor = (current, next) => {
         const dots = document.querySelectorAll("#dot")
