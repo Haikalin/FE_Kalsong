@@ -25,7 +25,7 @@ function App() {
   // }, [])
 
   return (
-    <div className="App bg-primary min-h-screen flex flex-col">
+    <div className="App bg-primary min-h-screen w-screen flex flex-col">
       <Title />
       <p id="miniTitle" className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
       <Carousel datas={tenFirstSongs}/>
