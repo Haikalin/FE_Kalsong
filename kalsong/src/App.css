@@ -32,7 +32,6 @@
 
 html, body {
   overflow-x: hidden;
-  overflow-y: hidden;
   min-height: 100vh;
   background-color: "#B3B3B3";
   width: 100vw;
