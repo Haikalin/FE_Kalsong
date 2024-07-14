@@ -46,6 +46,9 @@ module.exports = {
       fontSize: {
         'xxs': '.5rem',
       },
+      flexBasis: {
+        '18/100': '18%',
+      },
     },
   },
   plugins: [],

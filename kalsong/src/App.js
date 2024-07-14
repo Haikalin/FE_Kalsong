@@ -23,18 +23,24 @@ function App() {
   const [songData, setSongData] = useState()
 
   const handleSongData = (data) => {
+    console.log("Ini data", data)
     setSongData(data)
   }
 
-  const handleSongClickedtrue = () => {
-    setSongClicked(true)
-    handleSongData("Song Clicked")
-    console.log("Song Clicked")
+  const handleSongClickedtrue = (data) => {
+    handleSongData(data)
   }
   
   const handleSongClickedfalse = () => {
     setSongClicked(false)
   }
+
+  useEffect(() => {
+    if (songData !== undefined) {
+      setSongClicked(true);
+      console.log("Song Clicked", songData);
+    }
+  }, [songData]);
 
   // useEffect (() => {
   //   let titleMini = document.getElementById("miniTitle")
@@ -47,7 +53,7 @@ function App() {
       <p id="miniTitle"  className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
       <Carousel datas={tenFirstSongs}/>
       <Change_Time onChangeTenFirstSongs={changeTenFirstSongs} clickSong={handleSongClickedtrue}/>
-      {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse} data={songData}/> : null}
+      {/* {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse} data={songData}/> : null} */}
     </div>  
   );
 }
