@@ -32,7 +32,15 @@ function App() {
   }
   
   const handleSongClickedfalse = () => {
-    setSongClicked(false)
+    // document.getElementById("infoWrapper").classList.remove("out")
+    const infoElement = document.getElementById("info");
+    if (infoElement) {
+      infoElement.classList.remove("in");
+      infoElement.classList.add("out");
+      setTimeout(() => {
+        setSongClicked(false);
+      }, 500); // Durasi animasi
+    }
   }
 
   useEffect(() => {
@@ -41,6 +49,15 @@ function App() {
       console.log("Song Clicked", songData);
     }
   }, [songData]);
+
+  useEffect(() => {
+    const infoElement = document.getElementById("info");
+    console.log(infoElement);
+    if (infoElement) {
+      infoElement.classList.remove("out");
+      infoElement.classList.add("in");
+    }
+  }, [songClicked])
 
   // useEffect (() => {
   //   let titleMini = document.getElementById("miniTitle")
@@ -53,7 +70,7 @@ function App() {
       <p id="miniTitle"  className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
       <Carousel datas={tenFirstSongs}/>
       <Change_Time onChangeTenFirstSongs={changeTenFirstSongs} clickSong={handleSongClickedtrue}/>
-      {/* {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse} data={songData}/> : null} */}
+      {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse} data={songData}/> : null}
     </div>  
   );
 }

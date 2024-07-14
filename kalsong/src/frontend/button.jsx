@@ -62,7 +62,11 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
 
     // Animasi tabel
     const containerAnimation = () => {
+        const tombol = document.querySelectorAll("button")
         const table = document.getElementById("containerSong");
+        tombol.forEach((button) => {
+            button.disabled = true;
+        })
         table.classList.remove("fade-out");
         void table.offsetWidth;
         table.classList.add("fade-out");
@@ -72,6 +76,9 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
             table.classList.remove("fade-in");
             void table.offsetWidth;
             table.classList.add("fade-in");
+            tombol.forEach((button) => {
+                button.disabled = false;
+            })
         }, 1000)
     }
 
