@@ -1,13 +1,13 @@
 import "../tailwind.css";
 import "../index.css"
 
-export const TabelLagu = ({data, num}) => {
+export const TabelLagu = ({data, num, clickSong}) => {
 
     return (
-        <div id="containerSong" className="w-10/12 lg:w-1/2 mx-auto flex flex-wrap mt-4 lg:h-72 lg:min-h-72">
+        <div id="containerSong" className="w-10/12 h-48 min-h-48 lg:w-1/2 mx-auto flex flex-wrap mt-4 lg:h-72 lg:min-h-72">
         {data.map((song, index) => {
             return (
-                <div key={index+num} className="flex-shrink-0 p-1.5 basis-1/5 max-w-[20%]" >
+                <div key={index+num} onClick={clickSong} className="flex-shrink-0 p-1.5 basis-1/5 max-w-[20%]" >
                     <div id="containerImage" className="w-full mx-auto">
                         <img src={song.track.album.images[0].url} className="mx-auto rounded-lg lg:w-24" alt="" />
                         <link as="image" href={song.track.album.images[0].url} className="mx-auto rounded-lg lg:w-24" alt="" rel="preload" />

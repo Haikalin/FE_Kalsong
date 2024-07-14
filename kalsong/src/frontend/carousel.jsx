@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "../tailwind.css"
 import "../App.css"
 
-const Carousel = ({datas, clickSong}) => {
+const Carousel = ({datas}) => {
 
     const [slideIndex, setSlideIndex] = React.useState(0)
     const [isStart, setIsStart] = React.useState(false)
@@ -72,7 +72,7 @@ const Carousel = ({datas, clickSong}) => {
             <div id="showSlide" className="w-36 lg:w-56 h-36 lg:h-56 mx-auto overflow-hidden relative">
                 {datas.map((data, index) => {
                     return(
-                        <div id="singleItem" onclick={() => clickSong} class="container" className={`w-32 lg:w-52 lg:min-w-52 absolute border-2 border-light-second object-fit ${index === 0 ? "active" : "" }`} >
+                        <div id="singleItem" class="container" className={`w-32 lg:w-52 lg:min-w-52 absolute border-2 border-light-second object-fit ${index === 0 ? "active" : "" }`} >
                             <img src={data.track.album.images[0].url} alt="" loading="lazy" className="w-full min-w-full" />
                             <div id="songInfo" className="absolute w-full h-full bg-gradient-to-b bottom-0 font-Oswald">
                                 <div id="rank" className="absolute text-xl lg:text-4xl text-light-second top-1 left-1 font-bold">{index + 1}</div>

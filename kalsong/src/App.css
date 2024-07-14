@@ -36,3 +36,7 @@ html, body {
   background-color: "#B3B3B3";
   width: 100vw;
 }
+
+#info {
+  grid-template-areas: "foto info info";
+}

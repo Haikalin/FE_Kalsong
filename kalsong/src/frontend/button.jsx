@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import TabelArtis from "./tabelArtis.jsx";
 import Pagination from "./pagination.jsx";
 
-const Change_Time = ({onChangeTenFirstSongs}) => {
+const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     let [onemonthsong, setonemonthsong] = useState(() => {
         const onemonth =  localStorage.getItem('onemonthsong')
         if (onemonth) {
@@ -251,7 +251,7 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
                 <button id="button4" onClick={handleClik4} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-black p-2 rounded-lg mx-2">All time</button>
             </div>
             <Routes>
-                <Route path="/" element={<TabelLagu data={currentSongs} num={firstIndex}/>} />
+                <Route path="/" element={<TabelLagu data={currentSongs} num={firstIndex} clickSong={clickSong}/>} />
                 <Route path="/artis" element={<TabelArtis />} />
             </Routes>
             <Pagination onChangePage = {changePage} onchangeBgPage = {changeBgPage}/>

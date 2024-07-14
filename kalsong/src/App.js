@@ -19,10 +19,16 @@ function App() {
     setTenFirstSongs(data)
   }
 
-  const [songClicked, setSongClicked] = useState(false)
+  const [songClicked, setSongClicked] = useState()
+  const [songData, setSongData] = useState()
+
+  const handleSongData = (data) => {
+    setSongData(data)
+  }
 
   const handleSongClickedtrue = () => {
     setSongClicked(true)
+    handleSongData("Song Clicked")
     console.log("Song Clicked")
   }
   
@@ -36,12 +42,12 @@ function App() {
   // }, [])
 
   return (
-    <div className="App bg-primary min-h-screen w-screen flex flex-col">
+    <div className="App bg-primary min-h-screen w-screen flex relative flex-col">
       <Title />
-      <p id="miniTitle" className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
-      <Carousel datas={tenFirstSongs} clickSong={handleSongClickedtrue}/>
-      <Change_Time onChangeTenFirstSongs={changeTenFirstSongs}/>
-      {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse}/> : null}
+      <p id="miniTitle"  className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
+      <Carousel datas={tenFirstSongs}/>
+      <Change_Time onChangeTenFirstSongs={changeTenFirstSongs} clickSong={handleSongClickedtrue}/>
+      {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse} data={songData}/> : null}
     </div>  
   );
 }
