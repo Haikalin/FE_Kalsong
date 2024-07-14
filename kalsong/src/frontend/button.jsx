@@ -61,18 +61,25 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
     let miniTitle = document.getElementById("miniTitle");
 
     // Animasi tabel
-    const tableAnimation = () => {
-        const table = document.getElementById("isitabel");
-        document.getElementById("isitabel").classList.remove("fade-in");
+    const containerAnimation = () => {
+        const table = document.getElementById("containerSong");
+        table.classList.remove("fade-out");
         void table.offsetWidth;
-        document.getElementById("isitabel").classList.add("fade-in");
+        table.classList.add("fade-out");
+        setTimeout(() => {
+            table.classList.remove("fade-out");
+            void table.offsetWidth
+            table.classList.remove("fade-in");
+            void table.offsetWidth;
+            table.classList.add("fade-in");
+        }, 1000)
     }
 
     const listAnimation = () => {
         const list = document.getElementById("carousel");
-        document.getElementById("carousel").classList.remove("fade-in");
+        document.getElementById("carousel").classList.remove("fade-in-2");
         void list.offsetWidth;
-        document.getElementById("carousel").classList.add("fade-in");
+        document.getElementById("carousel").classList.add("fade-in-2");
     }
 
     // Ganti warna background button
@@ -94,7 +101,7 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
                 button.classList.add("bg-second-two")
             }
         })
-        tableAnimation();
+        containerAnimation();
     }
 
     // Ganti warna background button
@@ -182,7 +189,7 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
         }
         setSongs(result);
         onChangeTenFirstSongs(result.slice(0,10))
-        tableAnimation();
+        containerAnimation();
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (1 Month)";
     };
@@ -198,7 +205,7 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
         }
         setSongs(result);
         onChangeTenFirstSongs(result.slice(0,10))
-        tableAnimation();
+        containerAnimation();
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (6 Months)";
     };
@@ -214,7 +221,7 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
         }
         setSongs(result);
         onChangeTenFirstSongs(result.slice(0,10))
-        tableAnimation();
+        containerAnimation();
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (1 Year)";
     };
@@ -230,7 +237,7 @@ const Change_Time = ({onChangeTenFirstSongs}) => {
         }
         setSongs(result);
         onChangeTenFirstSongs(result.slice(0,10))
-        tableAnimation();
+        containerAnimation();
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (All Time)";
     };

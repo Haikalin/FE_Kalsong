@@ -42,6 +42,9 @@ module.exports = {
       backgroundImage: {
         'gradient-to-b': 'linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6))',
       },
+      fontSize: {
+        'xxs': '.5rem',
+      },
     },
   },
   plugins: [],

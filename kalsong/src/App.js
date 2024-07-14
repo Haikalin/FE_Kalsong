@@ -30,7 +30,7 @@ function App() {
       <p id="miniTitle" className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
       <Carousel datas={tenFirstSongs}/>
       <Change_Time onChangeTenFirstSongs={changeTenFirstSongs}/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>  
   );
 }
