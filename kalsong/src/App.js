@@ -39,6 +39,7 @@ function App() {
       infoElement.classList.add("out");
       setTimeout(() => {
         setSongClicked(false);
+        setSongData(undefined);
       }, 500); // Durasi animasi
     }
   }

@@ -72,3 +72,18 @@ html, body {
   align-items: center;
   justify-content: center;
 }
+
+@media screen and (max-width: 768px) {
+  #info {
+    display: grid;
+    grid-template-areas: "silang"
+                          "foto"
+                          "dataLagu";
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 35% 55%;
+  }
+  
+  #cross{
+    justify-content: right;
+  } 
+}

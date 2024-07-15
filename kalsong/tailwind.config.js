@@ -49,6 +49,9 @@ module.exports = {
       flexBasis: {
         '18/100': '18%',
       },
+      screens: {
+        'notphone': '500px',
+      },
     },
   },
   plugins: [],
