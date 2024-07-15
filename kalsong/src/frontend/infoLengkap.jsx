@@ -16,18 +16,18 @@ const InfoLengkap = ({clickCross, data }) => {
                 <div id="containerPict" className="flex items-center justify-center">
                     <img id="pict" src={data.track.album.images[0].url} className="opacity-100 w-32 md:w-48 rounded-lg border-solid border-2 border-primary"></img>
                 </div>
-                <div id="dataLagu" className="text-black flex flex-col flex-wrap justify-center">
-                    <div id="namaAlbum" className="text-black basis-1/3 flex justify-center items-center font-Oswald font-bold  align-middle">Album: <br />{data.track.album.name}</div>
-                    <div id="judulLagu" className="basis-1/3 flex justify-center items-center font-Oswald font-bold">Judul: <br />{data.track.name}</div>
-                    <div id="namaArtis" className="basis-1/3 flex justify-center items-center font-Oswald font-bold">Artis: <br />{data.track.artists[0].name}</div>
-                    <div id="releaseDate" className="basis-1/3 flex justify-center items-center font-Oswald font-bold">Tanggal Rilis: <br />{data.track.album.release_date}</div>
-                    <div id="duration" className="basis-1/3 flex justify-center items-center font-Oswald font-bold">Durasi: <br />{millisToMinutesAndSeconds(data.track.duration_ms)}</div>
-                    <a id="spotifyPict" href={data.track.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="basis-1/3 flex justify-center items-center font-Oswald font-bold">
+                <div id="dataLagu" className="text-black flex flex-col flex-wrap font-Oswald font-bold">
+                    <div id="namaAlbum" className="text-black basis-1/3 w-1/2 flex flex-wrap justify-center  items-center overflow-hidden text-clip align-middle">Album: <br />{data.track.album.name}</div>
+                    <div id="judulLagu" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Judul: <br />{data.track.name}</div>
+                    <div id="namaArtis" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Artis: <br />{data.track.artists[0].name}</div>
+                    <div id="releaseDate" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Tanggal Rilis: <br />{data.track.album.release_date}</div>
+                    <div id="duration" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Durasi: <br />{millisToMinutesAndSeconds(data.track.duration_ms)}</div>
+                    <a id="spotifyPict" href={data.track.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="basis-1/3 w-1/2 flex justify-center items-center font-Oswald font-bold">
                         <img src={spotifyImage} className="w-32" alt="" />
                     </a>
                 </div>
-                <div id="cross" onClick={clickCross} className="flex justify-end w-full">
-                    <img src={cross} alt="" className="w-8"/>
+                <div id="cross" className="flex justify-end w-full">
+                    <img src={cross} onClick={clickCross} alt="" className="w-8 hover:scale-110"/>
                 </div> 
             </div>
         </div>
