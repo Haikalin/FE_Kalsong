@@ -55,7 +55,9 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
 
     // Ganti halaman
     const changePage = (pageNumber) => {
-        setCurrentPage(pageNumber)
+        setTimeout(() => {
+            setCurrentPage(pageNumber)
+        }, 500)
     }
 
     let miniTitle = document.getElementById("miniTitle");

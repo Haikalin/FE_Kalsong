@@ -17,7 +17,7 @@ const InfoLengkap = ({clickCross, data }) => {
                     <img id="pict" src={data.track.album.images[0].url} className="opacity-100 w-32 md:w-48 rounded-lg border-solid border-2 border-primary"></img>
                 </div>
                 <div id="dataLagu" className="text-black text-sm md:text-base flex flex-col flex-wrap font-Oswald font-bold">
-                    <div id="namaAlbum" className="text-black basis-1/3 w-1/2 flex flex-wrap justify-center  items-center overflow-hidden text-clip align-middle">Album: <br />{data.track.album.name}</div>
+                    <div id="namaAlbum" className="text-black basis-1/3 w-1/2 flex flex-wrap justify-center  items-center overflow-hidden text-clip align-middle">Album: <br />{data.track.album.name === "Sambil Menggandeng Erat Tanganku (Te Wo Tsunaginagara)" ? "Sambil Menggandeng Erat Tanganku" : data.track.album.name}</div>
                     <div id="judulLagu" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Judul: <br />{data.track.name}</div>
                     <div id="namaArtis" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Artis: <br />{data.track.artists[0].name}</div>
                     <div id="releaseDate" className="basis-1/3 w-1/2 flex flex-wrap justify-center items-center">Tanggal Rilis: <br />{data.track.album.release_date}</div>
