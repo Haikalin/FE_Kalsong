@@ -194,9 +194,11 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
             result = response.data;
             setonemonthsong(result);
         }
-        setSongs(result);
-        onChangeTenFirstSongs(result.slice(0,10))
         containerAnimation();
+        setTimeout(() => {
+            setSongs(result);
+        }, 500)
+        onChangeTenFirstSongs(result.slice(0,10))
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (1 Month)";
     };
@@ -210,9 +212,11 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
             result = response.data;
             setsixmonthsong(result);
         }
-        setSongs(result);
-        onChangeTenFirstSongs(result.slice(0,10))
         containerAnimation();
+        setTimeout(() => {
+            setSongs(result);
+        }, 500)
+        onChangeTenFirstSongs(result.slice(0,10))
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (6 Months)";
     };
@@ -226,9 +230,11 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
             result = response.data;
             setoneyearsong(result);
         }
-        setSongs(result);
-        onChangeTenFirstSongs(result.slice(0,10))
         containerAnimation();
+        setTimeout(() => {
+            setSongs(result);
+        }, 500)
+        onChangeTenFirstSongs(result.slice(0,10))
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (1 Year)";
     };
@@ -242,9 +248,11 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
             result = response.data;
             setallyearsong(result);
         }
-        setSongs(result);
-        onChangeTenFirstSongs(result.slice(0,10))
         containerAnimation();
+        setTimeout(() => {
+            setSongs(result);
+        }, 500)
+        onChangeTenFirstSongs(result.slice(0,10))
         listAnimation();
         miniTitle.innerHTML = "Top 10 Haikal's songs (All Time)";
     };
