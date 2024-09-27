@@ -11,7 +11,7 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     let [onemonthsong, setonemonthsong] = useState(() => {
         const onemonth =  localStorage.getItem('onemonthsong')
         if (onemonth) {
-            console.log("One month local: "+onemonth)
+
             return JSON.parse(onemonth)
         }
         else {
@@ -21,7 +21,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     let [sixmonthsong, setsixmonthsong] = useState(() => {
         const sixmonth =  localStorage.getItem('sixmonthsong')
         if (sixmonth) {
-            console.log("Six month local: "+sixmonth)
             return JSON.parse(sixmonth)
         }
         else {
@@ -122,7 +121,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
 
     useEffect(() => {
         localStorage.setItem('onemonthsong', JSON.stringify(onemonthsong));
-        console.log("Lagi ganti")
         localStorage.setItem('sixmonthsong', JSON.stringify(sixmonthsong));
         localStorage.setItem('oneyearsong', JSON.stringify(oneyearsong));
         localStorage.setItem('allyearsong', JSON.stringify(allyearsong));
@@ -138,10 +136,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
             let alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
 
             let [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
-            console.log("One month response:", oneMonthResponse.data[2].track.name);
-            console.log("Six month response:", sixMonthResponse.data[2].track.name);
-            console.log("One year response:", oneYearResponse.data[2].track.name);
-            console.log("All time response:", allTimeResponse.data[2].track.name);
 
             setonemonthsong(oneMonthResponse.data);
             setsixmonthsong(sixMonthResponse.data);
@@ -189,7 +183,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     
     const handleClik = async () => {
         let result = onemonthsong;
-        console.log("One month:",result[2].track.name)
         add_bgreen("button1");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
@@ -207,7 +200,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     
     const handleClik2 = async () => {
         let result = sixmonthsong;
-        console.log("Six month:",result[2].track.name)
         add_bgreen("button2");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
@@ -225,7 +217,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     
     const handleClik3 = async () => {
         let result = oneyearsong;
-        console.log("One year:",result[2].track.name)
         add_bgreen("button3");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
@@ -243,7 +234,6 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     
     const handleClik4 = async () => {
         let result = allyearsong;
-        console.log("All year:",result[2].track.name)
         add_bgreen("button4");
         if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");

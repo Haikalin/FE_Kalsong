@@ -6,14 +6,18 @@ import "./tailwind.css";
 import Change_Time from './frontend/button.jsx';
 import Footer from './frontend/footer.jsx';
 import InfoLengkap from './frontend/infoLengkap.jsx';
+import { sql } from '@vercel/postgres';
+import axios from 'axios';
+// import dotenv from 'dotenv';
 
 
 function App() {
   const [tenFirstSongs, setTenFirstSongs] = useState([])
 
-  useEffect(() => {
-    console.log(tenFirstSongs)
-  }, [tenFirstSongs])
+  useEffect( async () => {
+    const data = await axios.get('https://be-spoti-1la3.vercel.app/addview')
+    console.log(data.data.rows)
+  }, [])
 
   const changeTenFirstSongs = (data) => {
     setTenFirstSongs(data)
@@ -23,7 +27,6 @@ function App() {
   const [songData, setSongData] = useState()
 
   const handleSongData = (data) => {
-    console.log("Ini data", data)
     setSongData(data)
   }
 
@@ -47,13 +50,11 @@ function App() {
   useEffect(() => {
     if (songData !== undefined) {
       setSongClicked(true);
-      console.log("Song Clicked", songData);
     }
   }, [songData]);
 
   useEffect(() => {
     const infoElement = document.getElementById("info");
-    console.log(infoElement);
     if (infoElement) {
       infoElement.classList.remove("out");
       infoElement.classList.add("in");
