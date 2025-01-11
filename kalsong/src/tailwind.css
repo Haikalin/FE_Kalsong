@@ -48,13 +48,3 @@
 .fade-out {
   animation: fadeOut 500ms forwards;
 }
-
-.bgblack {
-  background-color: #4E9F3D;
-}
-
-.bggreen {
-  background-color: #1E5128;
-  transition-duration: 500ms;
-  transition-timing-function: ease-out;
-}

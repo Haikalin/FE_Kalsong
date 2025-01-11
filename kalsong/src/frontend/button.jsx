@@ -3,48 +3,34 @@ import "../tailwind.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TabelLagu from "./tabelLagu.jsx";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TabelArtis from "./tabelArtis.jsx";
 import Pagination from "./pagination.jsx";
 
-const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
-    let [onemonthsong, setonemonthsong] = useState(() => {
-        const onemonth =  localStorage.getItem('onemonthsong')
-        if (onemonth) {
+const ChangeTime = ({ onChangeTenFirstSongs, clickSong }) => {
+    const [activePeriod, setActivePeriod] = useState('1month');
+    
+    // Initialize states from localStorage
+    const [onemonthsong, setonemonthsong] = useState(() => {
+        const onemonth = localStorage.getItem('onemonthsong')
+        return onemonth ? JSON.parse(onemonth) : []
+    });
 
-            return JSON.parse(onemonth)
-        }
-        else {
-            return []
-        }
-    })
-    let [sixmonthsong, setsixmonthsong] = useState(() => {
-        const sixmonth =  localStorage.getItem('sixmonthsong')
-        if (sixmonth) {
-            return JSON.parse(sixmonth)
-        }
-        else {
-            return []
-        }
-    })
-    let [oneyearsong, setoneyearsong] = useState(() => {
-        const oneyear =  localStorage.getItem('oneyearsong')
-        if (oneyear) {
-            return JSON.parse(oneyear)
-        }
-        else {
-            return []
-        }
-    })
-    let [allyearsong, setallyearsong] = useState(() => {
-        const alltime =  localStorage.getItem('allyearsong')
-        if (alltime) {
-            return JSON.parse(alltime)
-        }
-        else {
-            return []
-        }
-    })    
+    const [sixmonthsong, setsixmonthsong] = useState(() => {
+        const sixmonth = localStorage.getItem('sixmonthsong')
+        return sixmonth ? JSON.parse(sixmonth) : []
+    });
+
+    const [oneyearsong, setoneyearsong] = useState(() => {
+        const oneyear = localStorage.getItem('oneyearsong')
+        return oneyear ? JSON.parse(oneyear) : []
+    });
+
+    const [allyearsong, setallyearsong] = useState(() => {
+        const alltime = localStorage.getItem('allyearsong')
+        return alltime ? JSON.parse(alltime) : []
+    });
+
     const [songs, setSongs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(10);
@@ -52,30 +38,29 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
     const lastIndex = currentPage * songsPerPage;
     const currentSongs = songs.slice(firstIndex, lastIndex);
 
-    // Ganti halaman
+    // Change page with animation
     const changePage = (pageNumber) => {
         setTimeout(() => {
             setCurrentPage(pageNumber)
         }, 500)
+        containerAnimation();
     }
 
     let miniTitle = document.getElementById("miniTitle");
 
-    // Animasi tabel
+    // Table animation
     const containerAnimation = () => {
         const tombol = document.querySelectorAll("button")
         const table = document.getElementById("containerSong");
         tombol.forEach((button) => {
             button.disabled = true;
         })
-        table.classList.remove("fade-out");
+        table.classList.remove("fade-in");
         void table.offsetWidth;
         table.classList.add("fade-out");
         setTimeout(() => {
             table.classList.remove("fade-out");
             void table.offsetWidth
-            table.classList.remove("fade-in");
-            void table.offsetWidth;
             table.classList.add("fade-in");
             tombol.forEach((button) => {
                 button.disabled = false;
@@ -83,42 +68,39 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
         }, 1000)
     }
 
-    const listAnimation = () => {
-        const list = document.getElementById("carousel");
-        document.getElementById("carousel").classList.remove("fade-in-2");
-        void list.offsetWidth;
-        document.getElementById("carousel").classList.add("fade-in-2");
-    }
+    // Change background color for pagination
 
-    // Ganti warna background button
-    const changeBgPage = (idpage) => {
-        const pageButton = [
-            document.getElementById("buttonpage1"),
-            document.getElementById("buttonpage2"),
-            document.getElementById("buttonpage3"),
-            document.getElementById("buttonpage4"),
-            document.getElementById("buttonpage5"),            
-        ]
-        pageButton.forEach((button) => {
-            if (button.id === idpage) {
-                button.classList.remove("bg-second-two")
-                button.classList.add("bg-second-one")
-            }
-            else {
-                button.classList.remove("bg-second-one")
-                button.classList.add("bg-second-two")
-            }
-        })
-        containerAnimation();
-    }
+    // Add ripple effect and handle time period click
+    const handleTimeClick = async (e, period, handler) => {
+        setActivePeriod(period);
+        
+        // Add ripple effect
+        const button = e.currentTarget;
+        if (button) {
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+            ripple.className = 'absolute rounded-full bg-white opacity-30 animate-ripple';
+            button.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
 
-    // Ganti warna background button
+        handler();
+    };
+
+    // Initial setup
     useEffect(() => {
         const page1 = document.getElementById("buttonpage1")
-        page1.classList.remove("bg-second-two")
-        page1.classList.add("bg-second-one")
+        if (page1) {
+            page1.classList.remove("bg-second-two")
+            page1.classList.add("bg-second-one")
+        }
     }, []);
 
+    // Save to localStorage
     useEffect(() => {
         localStorage.setItem('onemonthsong', JSON.stringify(onemonthsong));
         localStorage.setItem('sixmonthsong', JSON.stringify(sixmonthsong));
@@ -126,65 +108,37 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
         localStorage.setItem('allyearsong', JSON.stringify(allyearsong));
     }, [onemonthsong, sixmonthsong, oneyearsong, allyearsong]);
 
-    // Mengambil data lagu
+    // Fetch initial data
     useEffect(() => {
         const fetchData = async () => {
-            const maxret = 10;
-            let onemonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
-            let sixmonth = axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
-            let oneyear = axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
-            let alltime = axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
+            try {
+                const [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth"),
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth"),
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear"),
+                    axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime")
+                ]);
 
-            let [oneMonthResponse, sixMonthResponse, oneYearResponse, allTimeResponse] = await Promise.all([onemonth, sixmonth, oneyear, alltime]);
-
-            setonemonthsong(oneMonthResponse.data);
-            setsixmonthsong(sixMonthResponse.data);
-            setoneyearsong(oneYearResponse.data);
-            setallyearsong(allTimeResponse.data);
-            setSongs(oneMonthResponse.data);
-            onChangeTenFirstSongs(oneMonthResponse.data.slice(0,10))
+                setonemonthsong(oneMonthResponse.data);
+                setsixmonthsong(sixMonthResponse.data);
+                setoneyearsong(oneYearResponse.data);
+                setallyearsong(allTimeResponse.data);
+                setSongs(oneMonthResponse.data);
+                onChangeTenFirstSongs(oneMonthResponse.data.slice(0, 10))
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
         };
 
         fetchData();
     }, []);
-    
-    useEffect(() => {
-        document.getElementById("button1").classList.remove("bg-second-two");
-        document.getElementById("button1").classList.add("bg-second-one");
-        document.getElementById("button1").classList.remove("text-black");
-        document.getElementById("button1").classList.add("text-white");
-    }, []);
-    
-    
 
-
-      const add_bgreen = (id) => {
-        const button = [
-            document.getElementById("button1"),
-            document.getElementById("button2"),
-            document.getElementById("button3"),
-            document.getElementById("button4")
-        ]
-        button.forEach((element) => {
-            if (element.id === id) {
-                element.classList.remove("bgblack")
-                element.classList.add("bggreen")
-                element.classList.remove("text-black")
-                element.classList.add("text-white")
-            }
-            else {
-                element.classList.remove("bggreen")
-                element.classList.add("bgblack")
-                element.classList.remove("text-white")
-                element.classList.add("text-black")
-            }
-        })
-    }
-    
+    // Time period handlers
     const handleClik = async () => {
         let result = onemonthsong;
-        add_bgreen("button1");
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(sixmonthsong) || 
+            JSON.stringify(result) === JSON.stringify(oneyearsong) || 
+            JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/onemonth");
             result = response.data;
             setonemonthsong(result);
@@ -193,15 +147,15 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
         setTimeout(() => {
             setSongs(result);
         }, 500)
-        onChangeTenFirstSongs(result.slice(0,10))
-        listAnimation();
+        onChangeTenFirstSongs(result.slice(0, 10))
         miniTitle.innerHTML = "Top 10 Haikal's songs (1 Month)";
     };
-    
+
     const handleClik2 = async () => {
         let result = sixmonthsong;
-        add_bgreen("button2");
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || 
+            JSON.stringify(result) === JSON.stringify(oneyearsong) || 
+            JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/sixmonth");
             result = response.data;
             setsixmonthsong(result);
@@ -210,15 +164,15 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
         setTimeout(() => {
             setSongs(result);
         }, 500)
-        onChangeTenFirstSongs(result.slice(0,10))
-        listAnimation();
+        onChangeTenFirstSongs(result.slice(0, 10))
         miniTitle.innerHTML = "Top 10 Haikal's songs (6 Months)";
     };
-    
+
     const handleClik3 = async () => {
         let result = oneyearsong;
-        add_bgreen("button3");
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(allyearsong)) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || 
+            JSON.stringify(result) === JSON.stringify(sixmonthsong) || 
+            JSON.stringify(result) === JSON.stringify(allyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/oneyear");
             result = response.data;
             setoneyearsong(result);
@@ -227,15 +181,15 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
         setTimeout(() => {
             setSongs(result);
         }, 500)
-        onChangeTenFirstSongs(result.slice(0,10))
-        listAnimation();
+        onChangeTenFirstSongs(result.slice(0, 10))
         miniTitle.innerHTML = "Top 10 Haikal's songs (1 Year)";
     };
-    
+
     const handleClik4 = async () => {
         let result = allyearsong;
-        add_bgreen("button4");
-        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || JSON.stringify(result) === JSON.stringify(sixmonthsong) || JSON.stringify(result) === JSON.stringify(oneyearsong)) {
+        if (result.length === 0 || JSON.stringify(result) === JSON.stringify(onemonthsong) || 
+            JSON.stringify(result) === JSON.stringify(sixmonthsong) || 
+            JSON.stringify(result) === JSON.stringify(oneyearsong)) {
             const response = await axios.get("https://apikalsong-haikalins-projects.vercel.app/alltime");
             result = response.data;
             setallyearsong(result);
@@ -244,27 +198,102 @@ const Change_Time = ({onChangeTenFirstSongs, clickSong}) => {
         setTimeout(() => {
             setSongs(result);
         }, 500)
-        onChangeTenFirstSongs(result.slice(0,10))
-        listAnimation();
+        onChangeTenFirstSongs(result.slice(0, 10))
         miniTitle.innerHTML = "Top 10 Haikal's songs (All Time)";
     };
+
     return (
-        <>
         <Router>
-            <div id="kumpulan_button" className="flex justify-center mt-8">
-                <button id="button1" onClick={handleClik} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-black p-2 rounded-lg mx-2 ">1 month</button>
-                <button id="button2" onClick={handleClik2} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-black p-2 rounded-lg mx-2">6 months</button>
-                <button id="button3" onClick={handleClik3} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-black p-2 rounded-lg mx-2">1 year</button>
-                <button id="button4" onClick={handleClik4} class="h-8 lg:h-10 text-xs lg:text-base w-18 lg:w-22 bg-second-two text-black p-2 rounded-lg mx-2">All time</button>
+            <div id="kumpulan_button" className="flex justify-center mt-16 gap-2 transition-transform duration-300 ease-in-out">
+                <button 
+                    id="button1" 
+                    onClick={(e) => handleTimeClick(e, '1month', handleClik)}
+                    className={`h-8 lg:h-10 text-xs lg:text-base px-4 rounded-lg
+                        transition-all duration-300 ease-in-out
+                        hover:shadow-lg hover:-translate-y-0.5
+                        active:shadow-inner active:translate-y-0
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50
+                        text-white relative overflow-hidden
+                        ${activePeriod === '1month' ? 'bg-green-700 scale-105' : 'bg-gray-700 hover:bg-gray-600'}`}
+                >
+                    <span className="relative z-10">1 month</span>
+                </button>
+
+                <button 
+                    id="button2" 
+                    onClick={(e) => handleTimeClick(e, '6months', handleClik2)}
+                    className={`h-8 lg:h-10 text-xs lg:text-base px-4 rounded-lg
+                        transition-all duration-300 ease-in-out
+                        hover:shadow-lg hover:-translate-y-0.5
+                        active:shadow-inner active:translate-y-0
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50
+                        text-white relative overflow-hidden
+                        ${activePeriod === '6months' ? 'bg-green-700 scale-105' : 'bg-gray-700 hover:bg-gray-600'}`}
+                >
+                    <span className="relative z-10">6 months</span>
+                </button>
+
+                <button 
+                    id="button3" 
+                    onClick={(e) => handleTimeClick(e, '1year', handleClik3)}
+                    className={`h-8 lg:h-10 text-xs lg:text-base px-4 rounded-lg
+                        transition-all duration-300 ease-in-out
+                        hover:shadow-lg hover:-translate-y-0.5
+                        active:shadow-inner active:translate-y-0
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50
+                        text-white relative overflow-hidden
+                        ${activePeriod === '1year' ? 'bg-green-700 scale-105' : 'bg-gray-700 hover:bg-gray-600'}`}
+                >
+                    <span className="relative z-10">1 year</span>
+                </button>
+
+                <button 
+                    id="button4" 
+                    onClick={(e) => handleTimeClick(e, 'alltime', handleClik4)}
+                    className={`h-8 lg:h-10 text-xs lg:text-base px-4 rounded-lg
+                        transition-all duration-300 ease-in-out
+                        hover:shadow-lg hover:-translate-y-0.5
+                        active:shadow-inner active:translate-y-0
+                        disabled:opacity-50 disabled:cursor-not-allowed
+                        focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50
+                        text-white relative overflow-hidden
+                        ${activePeriod === 'alltime' ? 'bg-green-700 scale-105' : 'bg-gray-700 hover:bg-gray-600'}`}
+                >
+                    <span className="relative z-10">All time</span>
+                </button>
             </div>
+
+            <style jsx>{`
+                @keyframes ripple {
+                    0% {
+                        transform: scale(0);
+                        opacity: 0.5;
+                    }
+                    100% {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+                .animate-ripple {
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                }
+                button {
+                    overflow: hidden;
+                    position: relative;
+                }
+            `}</style>
+
             <Routes>
-                <Route path="/" element={<TabelLagu data={currentSongs} num={firstIndex} clickSong={clickSong}/>} />
+                <Route path="/" element={<TabelLagu data={currentSongs} num={firstIndex} clickSong={clickSong} />} />
                 <Route path="/artis" element={<TabelArtis />} />
             </Routes>
-            <Pagination onChangePage = {changePage} onchangeBgPage = {changeBgPage}/>
+            <Pagination onChangePage={changePage}/>
         </Router>
-        </>
     );
-}
+};
 
-export default Change_Time;
+export default ChangeTime;

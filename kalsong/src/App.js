@@ -3,21 +3,19 @@ import './App.css';
 import React, { useEffect, useState } from "react";
 import Carousel from './frontend/carousel.jsx'
 import "./tailwind.css";
-import Change_Time from './frontend/button.jsx';
-import Footer from './frontend/footer.jsx';
+import ChangeTime from './frontend/button.jsx';
 import InfoLengkap from './frontend/infoLengkap.jsx';
-import { sql } from '@vercel/postgres';
-import axios from 'axios';
 // import dotenv from 'dotenv';
 
 
 function App() {
   const [tenFirstSongs, setTenFirstSongs] = useState([])
 
-  useEffect( async () => {
-    const data = await axios.get('https://be-spoti-1la3.vercel.app/addview')
-    console.log(data.data.rows)
-  }, [])
+  // useEffect( async () => {
+  //   const data = await axios.get('https://be-spoti-1la3.vercel.app/addview')
+  //   console.log(data.data.rows)
+  // }, [])
+
 
   const changeTenFirstSongs = (data) => {
     setTenFirstSongs(data)
@@ -71,7 +69,7 @@ function App() {
       <Title />
       <p id="miniTitle"  className='text-light-second font-bold text-xl font-Oswald'>Top 10 Haikal's songs (1 Month)</p>
       <Carousel datas={tenFirstSongs}/>
-      <Change_Time onChangeTenFirstSongs={changeTenFirstSongs} clickSong={handleSongClickedtrue}/>
+      <ChangeTime onChangeTenFirstSongs={changeTenFirstSongs} clickSong={handleSongClickedtrue}/>
       {songClicked ? <InfoLengkap clickCross = {handleSongClickedfalse} data={songData}/> : null}
     </div>  
   );
